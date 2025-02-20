@@ -16,6 +16,8 @@ public class FortuneTellerFrame extends JFrame
     int curFortuneDex = -1;
     Random rnd = new Random();
 
+
+
     public FortuneTellerFrame()
     {
         loadFortunes();
@@ -27,9 +29,19 @@ public class FortuneTellerFrame extends JFrame
         createBottomPanel();
 
         setTitle("Fortune Teller");
-        setSize(550, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        Toolkit tookit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tookit.getScreenSize();
+        int screenH = screenSize.height;
+        int screenW = screenSize.width;
+        int frameH = screenH * 3/4;
+        int frameW = screenW * 3/4;
+
+        setSize(frameW, frameH);
+        setLocation((screenW - frameW) / 2, (screenH - frameH) / 2);
+
 
     }
 
@@ -62,6 +74,7 @@ public class FortuneTellerFrame extends JFrame
         fortuneLbl.setHorizontalTextPosition(JLabel.CENTER);
         fortuneLbl.setVerticalTextPosition(JLabel.TOP);
 
+        fortuneLbl.setFont(new Font("Arial", Font.BOLD, 30));
         topPnl.add(fortuneLbl);
         mainPnl.add(topPnl, BorderLayout.NORTH);
 
@@ -73,6 +86,8 @@ public class FortuneTellerFrame extends JFrame
         fortuneArea = new JTextArea(15, 50);
         fortuneScroller = new JScrollPane(fortuneArea);
         middlePnl.add(fortuneScroller);
+
+        fortuneArea.setFont(new Font("Serif", Font.PLAIN, 20));
 
         mainPnl.add(middlePnl, BorderLayout.CENTER);
     }
@@ -95,6 +110,9 @@ public class FortuneTellerFrame extends JFrame
             curFortuneDex = newDex;
             fortuneArea.append(fortunes[newDex]+ "\n");
         });
+
+        fortuneBtn.setFont(new Font("Monospaced", Font.BOLD, 20));
+        quitBtn.setFont(new Font("Monospaced", Font.BOLD, 20));
         bottomPnl.add(fortuneBtn);
         bottomPnl.add(quitBtn);
         mainPnl.add(bottomPnl, BorderLayout.SOUTH);
